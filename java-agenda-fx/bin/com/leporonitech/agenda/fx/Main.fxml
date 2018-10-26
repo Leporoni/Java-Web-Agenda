@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox maxHeight="420.0" maxWidth="600.0" minHeight="420.0" minWidth="600.0" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.leporonitech.agenda.fx.MainController">
    <children>
@@ -24,16 +25,28 @@
       </Pane>
       <Pane prefHeight="233.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;">
          <children>
-            <TableView layoutX="-1.0" prefHeight="179.0" prefWidth="590.0">
+            <TableView fx:id="tabelaContatos" layoutX="-1.0" prefHeight="179.0" prefWidth="590.0">
               <columns>
-                <TableColumn prefWidth="245.0" text="Nome" />
-                <TableColumn prefWidth="184.0" text="Idade" />
-                  <TableColumn prefWidth="142.0" text="Telefone" />
+                <TableColumn prefWidth="245.0" text="Nome">
+                	<cellValueFactory>
+                		<PropertyValueFactory property="nome"/>
+                	</cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="184.0" text="Idade">
+                	<cellValueFactory>
+                		<PropertyValueFactory property="idade"/>
+                	</cellValueFactory>
+                </TableColumn>
+                  <TableColumn prefWidth="142.0" text="Telefone">
+                  	<cellValueFactory>
+                		<PropertyValueFactory property="telefone"/>
+                	</cellValueFactory>
+                  </TableColumn>
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Incluir" />
-            <Button layoutX="142.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Alterar" />
-            <Button layoutX="268.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Excluir" />
+            <Button fx:id="buttonIncluir" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Incluir" />
+            <Button fx:id="buttonAlterar" layoutX="142.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Alterar" />
+            <Button fx:id="buttonExcluir" layoutX="268.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Excluir" />
          </children>
       </Pane>
       <TitledPane collapsible="false" prefHeight="139.0" prefWidth="600.0" text="Informações de Contato">
@@ -53,19 +66,19 @@
                   <Label text="Nome:" />
                   <Label text="Idade:" GridPane.columnIndex="1" />
                   <Label text="Telefone:" GridPane.columnIndex="2" />
-                  <TextField GridPane.rowIndex="1">
+                  <TextField fx:id="txfNome" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="txfIdade" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Salvar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txfTelefone" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="buttonSalvar" mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Salvar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="buttonCancelar" mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
