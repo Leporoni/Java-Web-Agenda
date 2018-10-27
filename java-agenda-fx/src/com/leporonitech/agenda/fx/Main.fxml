@@ -23,32 +23,39 @@
             </Label>
          </children>
       </Pane>
+      
       <Pane prefHeight="233.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;">
          <children>
+            
             <TableView fx:id="tabelaContatos" layoutX="-1.0" prefHeight="179.0" prefWidth="590.0">
+              
               <columns>
-                <TableColumn prefWidth="245.0" text="Nome">
-                	<cellValueFactory>
-                		<PropertyValueFactory property="nome"/>
-                	</cellValueFactory>
-                </TableColumn>
-                <TableColumn prefWidth="184.0" text="Idade">
-                	<cellValueFactory>
-                		<PropertyValueFactory property="idade"/>
-                	</cellValueFactory>
-                </TableColumn>
-                  <TableColumn prefWidth="142.0" text="Telefone">
-                  	<cellValueFactory>
-                		<PropertyValueFactory property="telefone"/>
-                	</cellValueFactory>
-                  </TableColumn>
+                <TableColumn editable="false" prefWidth="263.0" text="Nome">
+							<cellValueFactory>
+								<PropertyValueFactory property="nome" />
+							</cellValueFactory>
+						</TableColumn>
+						<TableColumn editable="false" minWidth="9.0" prefWidth="127.0" text="Idade">
+							<cellValueFactory>
+								<PropertyValueFactory property="idade" />
+							</cellValueFactory>
+						</TableColumn>
+						<TableColumn editable="false" prefWidth="185.0" text="Telefone">
+							<cellValueFactory>
+								<PropertyValueFactory property="telefone" />
+							</cellValueFactory>
+				</TableColumn>
               </columns>
+              
             </TableView>
-            <Button fx:id="buttonIncluir" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Incluir" />
-            <Button fx:id="buttonAlterar" layoutX="142.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Alterar" />
-            <Button fx:id="buttonExcluir" layoutX="268.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Excluir" />
+            
+            <Button fx:id="buttonIncluir" layoutX="14.0" layoutY="194.0" mnemonicParsing="false" onAction="#buttonInserir_Action" prefHeight="25.0" prefWidth="116.0" text="Incluir" />
+            <Button fx:id="buttonAlterar" layoutX="142.0" layoutY="194.0" mnemonicParsing="false" onAction="#buttonAlterar_Action" prefHeight="25.0" prefWidth="116.0" text="Alterar" />
+            <Button fx:id="buttonExcluir" layoutX="268.0" layoutY="194.0" mnemonicParsing="false" onAction="#buttonExcluir_Action" prefHeight="25.0" prefWidth="116.0" text="Excluir" />
+         
          </children>
       </Pane>
+      
       <TitledPane collapsible="false" prefHeight="139.0" prefWidth="600.0" text="Informações de Contato">
          <content>
             <GridPane>
@@ -77,8 +84,8 @@
                      </GridPane.margin>
                   </TextField>
                   <TextField fx:id="txfTelefone" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="buttonSalvar" mnemonicParsing="false" prefHeight="25.0" prefWidth="199.0" text="Salvar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button fx:id="buttonCancelar" mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="buttonSalvar" mnemonicParsing="false" onAction="#buttonSalvar_Action" prefHeight="25.0" prefWidth="199.0" text="Salvar" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="buttonCancelar" mnemonicParsing="false" onAction="#buttonCancelar_Action" prefHeight="25.0" prefWidth="183.0" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
