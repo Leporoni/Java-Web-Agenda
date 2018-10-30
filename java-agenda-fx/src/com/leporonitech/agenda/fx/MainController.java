@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.leporonitech.agenda.entidades.Contato;
 import com.leporonitech.agenda.repositorios.impl.ContatoRepositorio;
+import com.leporonitech.agenda.repositorios.impl.ContatoRepositorioJdbc;
 import com.leporonitech.repositorios.interfaces.AgendaRepositorio;
 
 import javafx.collections.FXCollections;
@@ -156,17 +157,18 @@ public class MainController implements Initializable {
 	}
 
 	private void carregarTabelaContatos() throws SQLException, IOException {
-		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorio();
-		List<Contato> contatos = repositorioContato.selecionar();
-		if (contatos.isEmpty()) {
-			Contato contato = new Contato();
-			contato.setNome("Alex Leporoni");
-			contato.setIdade(43);
-			contato.setTelefone("5516981844976");
-			contatos.add(contato);
+		try {
+			AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
+			List<Contato> contatos = repositorioContato.selecionar();
+			ObservableList<Contato> contatoObservalbleList = FXCollections.observableArrayList(contatos);
+			this.tabelaContatos.getItems().setAll(contatoObservalbleList);
+		} catch (SQLException e) {
+			Alert mensagem = new Alert(AlertType.ERROR);
+			mensagem.setTitle("Erro!");
+			mensagem.setHeaderText("Erro no banco de dados");
+			mensagem.setContentText("Houve um erro ao obter a lista de contatos: " + e.getMessage());
+			mensagem.showAndWait();
 		}
-		ObservableList<Contato> contatoObservalbleList = FXCollections.observableArrayList(contatos);
-		this.tabelaContatos.getItems().setAll(contatoObservalbleList);
 	}
 
 	private void habilitarEdicaoAgenda(Boolean edicaoHabilitada) {
