@@ -62,24 +62,6 @@ public class MainController implements Initializable {
 		this.tabelaContatos.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		habilitarEdicaoAgenda(false);
-
-		// Capturando o elemento selecionado dentro de uma TableView (Modo de fazer com
-		// Java Versões Anteriores ao 9)
-
-		/*
-		 * this.tabelaContatos.getSelectionModel().selectedItemProperty().addListener(
-		 * new ChangeListener<Contato>() {
-		 * 
-		 * @Override public void changed(ObservableValue<? extends Contato> observable,
-		 * Contato oldValue, Contato newValue) { if (newValue != null) {
-		 * txfNome.setText(newValue.getNome());
-		 * txfIdade.setText(String.valueOf(newValue.getIdade()));
-		 * txfTelefone.setText(newValue.getTelefone()); } } });
-		 */
-
-		// Capturando o elemento selecionado dentro de uma TableView (Modo de fazer com
-		// versões pós Java 9 utilizando lambda)
-
 		this.tabelaContatos.getSelectionModel().selectedItemProperty()
 				.addListener((observador, contatoAntigo, contatoNovo) -> {
 					if (contatoNovo != null) {
@@ -141,19 +123,27 @@ public class MainController implements Initializable {
 	}
 
 	public void buttonSalvar_Action() throws SQLException, IOException {
-		AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorio();
-		Contato contato = new Contato();
-		contato.setNome(txfNome.getText());
-		contato.setIdade(Integer.parseInt(txfIdade.getText()));
-		contato.setTelefone(txfTelefone.getText());
-		if (this.ehInserir) {
-			repositorioContato.inserir(contato);
-		} else {
-			repositorioContato.atualizar(contato);
+		try {
+			AgendaRepositorio<Contato> repositorioContato = new ContatoRepositorioJdbc();
+			Contato contato = new Contato();
+			contato.setNome(txfNome.getText());
+			contato.setIdade(Integer.parseInt(txfIdade.getText()));
+			contato.setTelefone(txfTelefone.getText());
+			if (this.ehInserir) {
+				repositorioContato.inserir(contato);
+			} else {
+				repositorioContato.atualizar(contato);
+			}
+			habilitarEdicaoAgenda(false);
+			carregarTabelaContatos();
+			this.tabelaContatos.getSelectionModel().selectFirst();
+		} catch (Exception e) {
+			Alert mensagem = new Alert(AlertType.ERROR);
+			mensagem.setTitle("Erro!");
+			mensagem.setHeaderText("Erro no banco de dados");
+			mensagem.setContentText("Houve um erro ao manipular o contato: " + e.getMessage());
+			mensagem.showAndWait();
 		}
-		habilitarEdicaoAgenda(false);
-		carregarTabelaContatos();
-		this.tabelaContatos.getSelectionModel().selectFirst();
 	}
 
 	private void carregarTabelaContatos() throws SQLException, IOException {

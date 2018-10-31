@@ -1,4 +1,4 @@
-/*package com.leporonitech.agenda.fabricas;
+package com.leporonitech.agenda.fabricas;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,14 +13,14 @@ public class FabricaConexaoJdbc {
 	public static Connection criarConexao() throws IOException, SQLException {
 		InputStream is = FabricaConexaoJdbc.class.getClassLoader().getResourceAsStream("application.properties");
 		if (is == null) {
-			throw new FileNotFoundException("O arquivo de configura√ß√£o do banco de dados n√£o foi encontrado.");
+			throw new FileNotFoundException("O arquivo de configuraÁ„o do banco de dados n„o foi encontrado.");
 		}
 		Properties props = new Properties();
 		props.load(is);
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		Connection conexao = DriverManager.getConnection(props.getProperty("urlConexao"), 
-				props.getProperty("usuarioConexao"), props.getProperty("senhaConexao"));
+		Connection conexao = DriverManager.getConnection(props.getProperty("urlConnection"), 
+				props.getProperty("userConnection"), props.getProperty("passConnection"));
 		return conexao;
 	}
 	
-}*/
+}
